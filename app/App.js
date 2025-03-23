@@ -1,14 +1,33 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import MainButton from './src/components/specificComponent/MainButton';
 import MainText from './src/components/specificComponent/MainText';
+import Animacion from './src/components/specificComponent/animacionvoz';
 import "../global.css";
 
 export default function App() {
   return (
-    <View className="flex-1 justify-center items-center" style={{backgroundColor:'#28242c'}} >
-      <MainText />
+    <View style={styles.container}>
+      <View style={styles.textContainer}>
+        <MainText />
+      </View>
+      <Animacion/>
       <MainButton />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, 
+    justifyContent: "center", 
+    alignItems: "center", 
+    backgroundColor: '#28242c',
+  },
+  textContainer: {
+    position: "absolute", 
+    top: 50, 
+    width: "100%", 
+    alignItems: "center",
+  }
+});
