@@ -18,7 +18,8 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.murif.guideupcmovil"
     },
     "web": {
       "bundler": "metro"
