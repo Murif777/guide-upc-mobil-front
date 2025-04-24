@@ -6,6 +6,7 @@ import Animacion from '../components/specificComponent/animacionvoz';
 import Camara from '../components/specificComponent/camara';
 
 
+
 export default function Main() {
   return (
     <View style={styles.container}>

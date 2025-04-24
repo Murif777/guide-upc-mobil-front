@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Text, TextInput, Button, View, StyleSheet } from "react-native";
 import { enviarConsulta } from "../../services/AssistantService";
+import * as Speech from 'expo-speech';
 
 export default function MainText() {
     const [inputText, setInputText] = useState("");
@@ -9,9 +10,22 @@ export default function MainText() {
     const handleSubmit = async () => {
         try {
             const response = await enviarConsulta(inputText);
-            setResponseText(response); // Actualiza el texto con la respuesta del servidor
+    
+            // Habla la respuesta con expo-speech
+            Speech.speak(response, {
+                language: 'es-ES',
+                pitch: 0.4,
+                rate: 0.9,
+                voice: 'Microsoft Sabina - Spanish (Mexico)', 
+            });
+    
         } catch (error) {
-            setResponseText("Error al procesar la consulta."+error);
+            const errorMessage = "Error al procesar la consulta.";
+            setResponseText(errorMessage);
+            Speech.speak(errorMessage, {
+                language: 'es-ES',
+                voice: 'Microsoft Raul - Spanish (Mexico)',  
+            });
         }
     };
 
