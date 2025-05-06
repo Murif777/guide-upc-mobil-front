@@ -1,6 +1,6 @@
 import React from "react";
 import {  TouchableOpacity, Image, Vibration } from "react-native";
-import MainText from "./MainText";
+import MainText from "./MainSpeech";
 
 export default function MainButton() {
 
@@ -12,9 +12,9 @@ export default function MainButton() {
         <>
             <TouchableOpacity onPress={toggleText}>
                 <Image
-                    source={require('../../assets/images/eye.png')} // Reemplaza con la ruta correcta de tu logo
+                    source={require('../../assets/images/eye.png')} 
                     className="w-36 h-36 mt-2"
-                    style={{ resizeMode: 'contain', height: 150, width: 150 }} // Asegura que la imagen mantenga su proporción
+                    style={{ resizeMode: 'contain', height: 150, width: 150 }}
                 />
             </TouchableOpacity>
         </>

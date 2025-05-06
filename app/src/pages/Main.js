@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import MainButton from '../components/specificComponent/MainButton';
-import MainText from '../components/specificComponent/MainText';
+import MainText from '../components/specificComponent/MainSpeech';
 import Animacion from '../components/specificComponent/animacionvoz';
 import Camara from '../components/specificComponent/camara';
 
@@ -15,6 +15,7 @@ export default function Main() {
       </View>
       <Animacion />
       <View style={styles.buttonContainer}>
+        <MainButton/>
       </View>
     </View>
   );

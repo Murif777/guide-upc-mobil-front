@@ -13,7 +13,7 @@ export default function Animationvoz() {
     <View style={styles.container}>
       {isVisible && (
         <LottieView
-          source={require("../../assets/animaciones/Animation - 1742758960326.json")}
+          source={require("../../assets/animaciones/Animation_modified.json")} // Reemplaza con la ruta correcta de tu archivo JSON
           autoPlay
           loop
           style={styles.animation}
