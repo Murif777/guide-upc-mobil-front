@@ -36,7 +36,7 @@ export const getServer = () => {
   return 'localhost';
 };
 
-axios.defaults.baseURL = `http://${getServer()}:8080/`;
+axios.defaults.baseURL = `http://${getServer()}:8080`;
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.withCredentials = true;

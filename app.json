@@ -13,16 +13,31 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSSpeechRecognitionUsageDescription": "Allow $(PRODUCT_NAME) to use speech recognition.",
+        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to use the microphone."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
       },
-      "package": "com.murif.guideupcmovil"
+      "package": "com.murif.guideupcmovil",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "bundler": "metro"
+    },
+    "plugins": [
+      "expo-speech-recognition"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a3a555a5-a947-45d3-91e8-2fa88c3416f4"
+      }
     }
   }
 }

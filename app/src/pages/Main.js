@@ -13,7 +13,7 @@ export default function Main() {
       <View style={styles.textContainer}>
         <MainText />
       </View>
-      <Animacion />
+      <Animacion/>
       <View style={styles.buttonContainer}>
         <MainButton/>
       </View>
