@@ -13,6 +13,7 @@ export const VoiceProvider = ({ children }) => {
     const [partialResults, setPartialResults] = useState([]);
     const [isAvailable, setIsAvailable] = useState(false);
     const [hasPermission, setHasPermission] = useState(false);
+    const [isButtonPressed, setIsButtonPressed] = useState(false); // Nuevo estado para inicialización de la app
 
     // Verificar disponibilidad del reconocimiento de voz al cargar
     useEffect(() => {
@@ -210,7 +211,9 @@ export const VoiceProvider = ({ children }) => {
                 partialResults,
                 stopSpeaking,
                 isAvailable,
-                hasPermission
+                hasPermission,
+                isButtonPressed, // Nuevo estado
+                setIsButtonPressed // Nueva función para modificar el estado
             }}
         >
             {children}

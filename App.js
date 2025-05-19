@@ -1,4 +1,4 @@
 import { registerRootComponent } from 'expo';
-import App from './app/App'; // Ajusta la ruta según tu estructura
+import App from './app/App';
 
 registerRootComponent(App);

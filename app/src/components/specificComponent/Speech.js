@@ -53,7 +53,7 @@ export const speakError = (text, onDone = null) => {
             if (onDone) onDone();
         },
         onError: (error) => {
-            console.error("Error en síntesis de voz (error):", error);
+            console.error("Error en síntesis de voz (error):", error.message);
             _isSpeaking = false;
             if (onDone) onDone();
         },

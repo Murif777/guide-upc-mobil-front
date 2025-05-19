@@ -12,15 +12,19 @@ export default function MainButton() {
         isListening,
         stopSpeaking,
         isAvailable,
-        partialResults
+        partialResults,
+        isButtonPressed, // Usar el nuevo estado
+        setIsButtonPressed // Usar la función para modificar el estado
     } = useContext(VoiceContext);
 
     const [buttonState, setButtonState] = useState('ready'); // 'ready', 'listening', 'processing'
-    const [currentText, setCurrentText] = useState('Presiona para hablar');
+    const [currentText, setCurrentText] = useState('Presiona para iniciar');
 
     // Actualizar texto basado en resultados parciales
     useEffect(() => {
-        if (isListening && partialResults.length > 0 && partialResults[0].trim() !== '') {
+        if (!isButtonPressed) {
+            setCurrentText('Presiona para iniciar');
+        } else if (isListening && partialResults.length > 0 && partialResults[0].trim() !== '') {
             setCurrentText(`"${partialResults[0]}"`);
         } else if (isListening) {
             setCurrentText('Escuchando...');
@@ -31,13 +35,19 @@ export default function MainButton() {
         } else {
             setCurrentText('Presiona para hablar');
         }
-    }, [isListening, isSpeaking, buttonState, partialResults]);
+    }, [isListening, isSpeaking, buttonState, partialResults, isButtonPressed]);
 
     // Función para controlar el botón de voz
     const handleVoiceButton = async () => {
         // Vibrar para feedback táctil (si está disponible en la plataforma)
         if (Platform.OS !== 'web') {
             Vibration.vibrate(100);
+        }
+
+        // Si el botón nunca ha sido presionado, lo marcamos como inicializado
+        if (!isButtonPressed) {
+            setIsButtonPressed(true);
+            return; // Solo inicializamos la app, no continuamos con la lógica de voz todavía
         }
 
         // Si el sistema está hablando, lo detenemos
@@ -76,6 +86,7 @@ export default function MainButton() {
 
     // Indicador visual basado en el estado
     const getButtonStyle = () => {
+        if (!isButtonPressed) return styles.notInitialized; // Nuevo estilo para el botón no inicializado
         if (isSpeaking) return styles.speaking;
         if (isListening) return styles.listening;
         if (buttonState === 'processing') return styles.processing;
@@ -89,8 +100,10 @@ export default function MainButton() {
                 style={[styles.button, getButtonStyle()]}
                 activeOpacity={0.7}
                 accessible={true}
-                accessibilityLabel="Botón de control de voz"
-                accessibilityHint="Presiona para hablar, presiona mientras escucha para detener, presiona mientras habla para detener la respuesta"
+                accessibilityLabel={isButtonPressed ? "Botón de control de voz" : "Botón para iniciar la aplicación"}
+                accessibilityHint={isButtonPressed 
+                    ? "Presiona para hablar, presiona mientras escucha para detener, presiona mientras habla para detener la respuesta" 
+                    : "Presiona para comenzar a usar la aplicación"}
                 accessibilityRole="button"
             >
                 <Image
@@ -129,6 +142,10 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 'bold',
         color: 'white',
+    },
+    notInitialized: {
+        borderColor: '#9C27B0', // Color púrpura para el estado no inicializado
+        borderWidth: 3,
     },
     ready: {
         borderColor: '#4CAF50',

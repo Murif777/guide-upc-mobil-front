@@ -1,24 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useContext, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import LottieView from "lottie-react-native";
+import { VoiceContext } from "../hooks/useVoice";
 
 export default function Animationvoz() {
-  const [isVisible, setIsVisible] = useState(false);
+  const { isSpeaking } = useContext(VoiceContext);
+  const animationRef = useRef(null);
 
   useEffect(() => {
-    setIsVisible(true);
-  }, []);
+    if (isSpeaking) {
+      // Si está hablando, reproducir la animación
+      animationRef.current?.resume();
+    } else {
+      // Si no está hablando, pausar la animación
+      animationRef.current?.pause();
+    }
+  }, [isSpeaking]);
 
   return (
     <View style={styles.container}>
-      {isVisible && (
-        <LottieView
-          source={require("../../assets/animaciones/Animation_modified.json")} // Reemplaza con la ruta correcta de tu archivo JSON
-          autoPlay
-          loop
-          style={styles.animation}
-        />
-      )}
+      <LottieView
+        ref={animationRef}
+        source={require("../../assets/animaciones/Animation_modified.json")}
+        autoPlay={false} 
+        loop={true}
+        style={styles.animation}
+      />
     </View>
   );
 }
@@ -27,15 +34,11 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    width: 200, 
-    height: 200, 
-
-
+    width: 200,
+    height: 200,
   },
   animation: {
     width: 120,
     height: 120,
   },
 });
-
-
